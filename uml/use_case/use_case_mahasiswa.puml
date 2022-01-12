@@ -1,0 +1,40 @@
+@startuml
+left to right direction
+actor "Mahasiswa" as mahasiswa
+actor "Admin" as admin
+
+rectangle "Seminar Kerja Praktek" {
+    usecase "Mendaftar Akun" as daftarAkun
+    usecase "Melakukan Login" as login
+    usecase "Mendaftar Seminar" as seminar
+    usecase "Daftar Peserta Seminar" as peserta
+    usecase "Daftar Penyeminar Seminar" as penyeminar
+    usecase "Cetak Sertifikat" as sertif
+    usecase "Upload Slip Pembayaran" as slipbayar
+
+    usecase "Melengkapi Berkas" as lengkapiBerkas
+
+    usecase "Manage Seminar" as manageSeminar
+    usecase "Manage Data Mahasiswa" as managePeserta
+    usecase "Manage Data Sertifikat" as manageSertif
+    usecase "Konfirmasi Pembayaran" as konfirmasiPembayaran
+
+}
+
+mahasiswa -- daftarAkun
+mahasiswa -- seminar
+mahasiswa -- login
+
+peserta .up.> seminar : <<extends>>
+penyeminar .up.> seminar : <<extends>>
+mahasiswa -- sertif
+seminar .right.> slipbayar : <<include>>
+admin -- login
+
+login .down.> managePeserta : <<include>>
+login .down.> manageSertif : <<include>>
+login .down.> konfirmasiPembayaran : <<include>>
+login .left.> manageSeminar : <<include>>
+
+penyeminar .left.> lengkapiBerkas : <<include>>
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+node "Sistem Seminar KP"{
+    node "DTO" as dto
+    node "Model" as model
+    node "Controller" as controller
+    node "View" as view
+    node "Service" as service
+    node "Repository" as repository
+}
+
+database "MySql" as mysql
+
+user --> controller : 1
+controller --> service : 2
+service --> repository: 3
+repository --> mysql : 4
+repository --> model : 5
+controller --> dto : 6
+controller --> view : 7
+controller --> user : 8
+
+
+
+
+@enduml

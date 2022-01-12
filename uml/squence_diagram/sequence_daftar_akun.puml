@@ -1,0 +1,33 @@
+@startuml
+
+autonumber
+
+actor Mahasiswa
+boundary "FormRegister" as formRegistrasi
+control "UserService" as userService
+entity "User" as user
+boundary "FormLogin" as formLogin
+
+Mahasiswa -> formRegistrasi : insertNim()
+activate formRegistrasi
+formRegistrasi -> userService : daftarAkun()
+activate userService
+userService -> user : getNim()
+activate user
+deactivate user
+
+
+alt "nim falid"
+    userService -> user : insertUser()
+    activate user
+    deactivate user
+    userService -> formLogin : tampilkan()
+    activate formLogin
+
+else tidak falid
+    userService --> formRegistrasi : pesanKesalahan()
+end
+
+
+
+@enduml

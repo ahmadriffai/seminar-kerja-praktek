@@ -1,0 +1,31 @@
+@startuml
+
+autonumber
+
+actor Mahasiswa as mahasiswa
+boundary "ViewSeminar" as viewSeminar
+control "SeminarService" as seminarService
+entity "Peserta Seminar" as pesertaSeminar
+entity "Penyeminar" as penyeminar
+
+mahasiswa -> viewSeminar : pilihSeminar()
+activate viewSeminar
+
+viewSeminar -> seminarService : daftarSeminar()
+activate seminarService
+
+alt "daftar peserta"
+    seminarService -> pesertaSeminar : insertSeminar()
+    activate pesertaSeminar
+    deactivate pesertaSeminar
+else "daftar penyeminar"
+    alt "memenuhi syarat"
+        seminarService -> penyeminar : insertSeminar()
+        activate penyeminar
+        deactivate penyeminar
+    else "tidak memenuhi syarat"
+        seminarService -> viewSeminar : tamplikan(pesanKesalahan)
+    end
+end
+
+@enduml

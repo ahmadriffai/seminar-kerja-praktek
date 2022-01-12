@@ -1,0 +1,90 @@
+@startuml
+
+entity Mahasiswa {
+    * nim
+    --
+    nama
+    prodi
+    angkatan
+    nomer_handphone
+    email
+    user_id
+}
+
+entity Peserta_Seminar{
+    * id
+    --
+    *nim
+    *seminar_id
+    tangal_daftar
+}
+
+entity Penyeminar{
+    *id
+    --
+    *nim
+    *seminar_id
+    tanggal_daftar
+    laporan_kp
+    lembar_bimbingan
+    tangal_daftar
+    is_terima
+}
+
+entity Seminar{
+    *id
+    --
+    nama_seminar
+    tanggal_mulai
+    tanggal_selesai
+    lokasi
+    gambar
+    kuota
+    selesai
+}
+
+entity Sertifikat{
+    *id
+    --
+    gambar
+    *seminar_id
+}
+
+entity Sertifikat_Mahasiswa{
+    *id
+    --
+    *nim
+    seminar_id
+}
+
+entity Pembayaran{
+    *id
+    --
+    *nim
+    seminar_id
+    jenis_pembayaran
+    slip_pembayaran
+    tanggal_konfirmasi
+    is_konfirmasi
+}
+
+entity UserAccount{
+    *id
+    --
+    username
+    password
+    role
+    role
+}
+
+entity Admin{
+    *id
+    --
+    nama
+    email
+    nomer_handphone
+}
+
+
+
+@enduml

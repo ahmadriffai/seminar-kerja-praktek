@@ -1,0 +1,31 @@
+@startuml
+
+autonumber
+
+actor Mahasiswa
+boundary "FormLogin" as viewLogin
+control "UserService" as login
+entity "User" as user
+boundary Dashboard
+
+Mahasiswa -> viewLogin : insertUsernamePassword()
+activate viewLogin
+viewLogin -> login : login()
+activate login
+login -> user : getUser()
+activate user
+deactivate user
+
+
+alt falid
+    login -> Dashboard : tampilkan()
+    deactivate login
+    activate Dashboard
+else tidak falid
+    login --> viewLogin : pesanKesalahan()
+    activate login
+end
+
+
+
+@enduml
