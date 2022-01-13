@@ -41,13 +41,13 @@
                                     {{ $value->nama_seminar }}
                                 </h5>
                                 <p class="text-black-50">
-                                    {{ $value->deskripsi }}
+                                    {{ implode(" ",array_slice(explode(" ",$value->deskripsi), 0,10)) }}.....
                                 </p>
                                 <a href="{{ route('guest.seminar.detail', ['id' => $value->id]) }}" class="btn btn-sm btn-outline-warning">Daftar</a>
                             </div>
                             <div class="card-footer d-flex justify-content-between">
                                 <p class="text-black-50">Sisa Kuota : {{ $value->kuota }}</p>
-                                <p class="text-black-50">10 hari lagi</p>
+                                <p class="text-black-50">{{ (int)date('d', strtotime($value->tanggal_selesai)) - (int)date('d') }} hari lagi</p>
                             </div>
                         </div>
                     </div>

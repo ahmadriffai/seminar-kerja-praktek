@@ -21,7 +21,9 @@ class CreatePesertaSeminar extends Migration
                 ->references("nim")->on("mahasiswa");
             $table->foreign("seminar_id")
                 ->references("id")->on("seminar");
-            $table->timestamps();
+            $table->string("qr_code")->nullable();
+            $table->boolean("is_bayar");
+            $table->boolean("is_hadir");
         });
     }
 

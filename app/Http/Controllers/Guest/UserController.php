@@ -9,7 +9,9 @@ use App\Http\Requests\UserAccountRegisterRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Model\Mahasiswa;
 use App\Service\Impl\MahasiswaServiceImpl;
+use App\Service\Impl\SessionServiceImpl;
 use App\Service\Impl\UserServiceImpl;
+use App\Service\SessionService;
 use App\Service\UserService;
 use Illuminate\Http\Request;
 
@@ -17,11 +19,12 @@ class UserController extends Controller
 {
     //
     private UserService $userService;
+    private SessionService $sessionService;
 
     public function __construct()
-    {
-        $this->mahasiswaService = new MahasiswaServiceImpl();
+    {;
         $this->userService = new UserServiceImpl();
+        $this->sessionService = new SessionServiceImpl();
     }
 
 
@@ -57,7 +60,7 @@ class UserController extends Controller
     public function accountRegisterPost(UserAccountRegisterRequest $request, Mahasiswa $mahasiswa){
         try {
             $respponse = $this->userService->accountRegister($request,$mahasiswa);
-            return redirect()->route("admin.mahasiswa.index")->with("success", "Berhasil mendaftar akun");
+            return redirect()->route("guest.user.login")->with("success", "Berhasil mendaftar akun");
         }catch (ValidationExcepton $exception){
             return back()->with("error", $exception->getMessage())->withInput($request->all());
         }
@@ -73,10 +76,22 @@ class UserController extends Controller
     public function loginPost(UserLoginRequest $request){
         try {
             $respponse = $this->userService->login($request);
+            $this->sessionService->create($respponse->user->id);
             return redirect()->route("admin.mahasiswa.index")->with("success", "Berhasil login");
         }catch (ValidationExcepton $exception){
             return back()->with("error", $exception->getMessage())->withInput($request->all());
         }
     }
+
+
+    public function logout(){
+        try {
+            $this->sessionService->destroy();
+            return redirect()->route("guest.user.login")->with("success", "Berhasil logout");
+        }catch (ValidationExcepton $exception){
+            return redirect()->route("guest.user.login")->with("error", $exception->getMessage());
+        }
+    }
+
 
 }

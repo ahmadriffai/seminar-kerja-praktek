@@ -28,17 +28,15 @@
         <div class="dropdown">
             <button class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="./asset/img/profile.png" alt="" class="profile-image">
+                <img src="{{ asset('asset/img/profile.png') }}" alt="" class="profile-image">
             </button>
 
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li>
-                    <a class="dropdown-item" href="login.html"><span class="fas fa-sign-out-alt"></span> Logout</a>
+                    <a class="dropdown-item" href="{{ route('guest.user.logout') }}"><span class="fas fa-sign-out-alt"></span> Logout</a>
                 </li>
             </ul>
         </div>
-
-        <span class="profile-name">User</span>
     </div>
 </nav>
 <!-- //navbar -->

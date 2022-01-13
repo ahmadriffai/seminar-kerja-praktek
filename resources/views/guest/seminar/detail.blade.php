@@ -3,7 +3,7 @@
 @section("content")
     <!-- banner -->
     <div class="banner-seminar border-bottom">
-        <img src="{{ asset('/asset/img/banner-seminar.jpg') }}" alt="" class="img-fluid">
+{{--        <img src="{{ asset('/asset/img/banner-seminar.jpg') }}" alt="" class="img-fluid">--}}
     </div>
 
     <div class="container">
@@ -13,7 +13,7 @@
                     <div class="col-lg-3 col-sm-5 col-md-4 mb-sm-7">
                         <div class="border-0 shadow gambar-seminar" style="width: 15rem">
                             <div class="card-gambar">
-                                <img src="{{ asset($seminar->gambar) }}" class="img-fluid" alt="..." />
+{{--                                <img src="{{ asset($seminar->gambar) }}" class="img-fluid" alt="..." />--}}
                             </div>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
             </div>
             <div class="col-lg-2 pt-lg-4 pt-sm-0 text-center">
                 <span class="text-muted d-block mb-2">Terbuka Hingga:</span>
-                <b>{{ $seminar->tanggal_selesai }}</b>
+                <b>{{ date('d F Y', strtotime($seminar->tanggal_selesai )) }}</b>
                 <span class="text-muted d-block mt-3 mb-2">Sisa Kuota:</span>
                 <b>{{ $seminar->kuota }} peserta</b>
             </div>
@@ -57,43 +57,45 @@
                         <div class="fr-view mb-5">
                             {{ $seminar->deskripsi }}
                         </div>
-                        <div class="fb-like" data-share="true" data-href="https://www.dicoding.com/events/4282"
-                             data-layout="button_count"></div>
-
-
-
                     </div>
                     <div class="col-lg-3 order-lg-2 order-1 pl-lg-4 mb-5 event-info">
 
-                        <div class="d-registration mb-5">
-                            <div class="text-for-element">Keikutsertaan</div>
-                            <div class="d-registered-not-start">
-                                <div class="alert alert-success">
-                                    Anda telah terdaftar pada Event ini.
+                        @if($terdaftar)
+                            <div class="d-registration mb-5">
+                                <div class="text-for-element">Keikutsertaan</div>
+                                <div class="d-registered-not-start">
+                                    <div class="alert alert-success">
+                                        Anda sudah terdaftar dalam seminar
+                                    </div>
                                 </div>
-                                <form method="POST" action="https://www.dicoding.com/events/4282/join" accept-charset="UTF-8"
-                                      role="form" class="inline u-margin d-registration-cancellation"><input name="_method"
-                                                                                                             type="hidden" value="DELETE"><input name="_token" type="hidden"
-                                                                                                                                                 value="t8hb2CQblf5xQXSguU3bOKc57nWwX1aFhxobtwLg"><button type="submit"
-                                                                                                                                                                                                          class="btn btn-md btn-secondary shadow mb-1 btn-block">
-                                        <i class="fas fa-times"></i> Batalkan Pendaftaran
-                                    </button></form>
-                            </div>
 
-                            <a href='https://www.dicoding.com/events/4282/ticket'
-                               class='btn btn-warning text-white shadow btn-md mt-5 btn-'>Lihat Tiket Anda</a>
-                        </div>
+                                <a href=""
+                                   class='btn btn-warning text-white shadow btn-md mt-1 btn-'>Lihat Tiket Seminar</a>
+                            </div>
+                        @else
+                            <div class="d-registration mb-5">
+                                <div class="text-for-element">Keikutsertaan</div>
+                                <div class="d-registered-not-start">
+                                    <div class="alert alert-danger">
+                                        Anda belum terdaftar dalam seminar
+                                    </div>
+                                </div>
+
+                                <a href="{{ route('guest.peserta-seminar.daftar',['seminar' => $seminar]) }}"
+                                   class='btn btn-warning text-white shadow btn-md mt-1 btn-'>Ikuti Seminar</a>
+                            </div>
+                        @endif
 
 
                         <div class="mb-5">
                             <div class="text-for-element">Jadwal Pelaksanaan</div>
                             <div class="row">
                                 <div class="col-sm-3">Mulai</div>
-                                <div class="col-sm-9">: {{ $seminar->tanggal_mulai }}</div>
+                                <div class="col-sm-9">: {{ date('d F Y', strtotime($seminar->tanggal_mulai ))}}</div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-3">Selesai</div>
-                                <div class="col-sm-9">: {{ $seminar->tanggal_mulai }}</div>
+                                <div class="col-sm-9">: {{ date('d F Y', strtotime($seminar->tanggal_selesai )) }}</div>
                             </div>
                         </div>
                         <div class="mb-5">

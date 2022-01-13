@@ -1,7 +1,7 @@
 @extends("layout.guest")
 
 @section("content")
-    <section id="kerja-praktek" class="bg-white py-5 my-5">
+    <section id="kerja-praktek" class="bg-white pb-5 mb-5 mt-2">
         <div class="container">
             <div class="row pt-3">
                 <div class="section-judul">
