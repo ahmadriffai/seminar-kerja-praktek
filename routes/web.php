@@ -34,7 +34,7 @@ Route::namespace("Guest")->name("guest.")->group(function () {
     });
     // peserta seminar
     Route::prefix("peserta-seminar")->name("peserta-seminar.")->group(function (){
-        Route::get("/daftar/{seminar}", "PesertaSeminarController@registration")->name("daftar");
+        Route::post("/daftar/{seminar}", "PesertaSeminarController@registration")->name("daftar");
     });
 });
 
@@ -60,6 +60,18 @@ Route::namespace("Admin")->prefix("admin")->name("admin.")->group(function (){
         Route::get("/", "SeminarController@index")->name("index");
         Route::get("/add", "SeminarController@add")->name("add");
         Route::post("/add", "SeminarController@addPost")->name("add-post");
+    });
+
+
+});
+
+// Mahasiswa
+Route::namespace("Mahasiswa")->prefix("mahasiswa")->name("mahasiswa.")->group(function (){
+    /*
+     * Seminar
+     */
+    Route::prefix("seminar")->name("seminar.")->group(function (){
+        Route::get("/", "SeminarController@registered")->name("registered");
     });
 
 

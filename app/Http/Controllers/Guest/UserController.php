@@ -77,7 +77,7 @@ class UserController extends Controller
         try {
             $respponse = $this->userService->login($request);
             $this->sessionService->create($respponse->user->id);
-            return redirect()->route("admin.mahasiswa.index")->with("success", "Berhasil login");
+            return redirect()->route("mahasiswa.seminar.registered")->with("success", "Berhasil login");
         }catch (ValidationExcepton $exception){
             return back()->with("error", $exception->getMessage())->withInput($request->all());
         }

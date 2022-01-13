@@ -4,9 +4,11 @@ namespace App\Service\Impl;
 
 use App\Exceptions\MustLoginException;
 use App\Exceptions\ValidationExcepton;
+use App\Http\Requests\PesertaSeminarRegisRequest;
 use App\Http\Response\PesertaSeminarResponse;
 use App\Model\Mahasiswa;
 use App\Model\Seminar;
+use App\Model\Tiket;
 use App\Service\PesertaSeminarService;
 use App\Util\GenerateQRUtil;
 use App\Util\RandomUtil;
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 class PesertaSeminarServiceImpl implements PesertaSeminarService
 {
 
-    public function registration(Seminar $seminar, ?Mahasiswa $mahasiswa): PesertaSeminarResponse
+    public function registration(PesertaSeminarRegisRequest $request, Seminar $seminar, ?Mahasiswa $mahasiswa): PesertaSeminarResponse
     {
 
         if ($seminar == null){
@@ -35,12 +37,12 @@ class PesertaSeminarServiceImpl implements PesertaSeminarService
         if ($pesertaSeminar != null){
             throw new ValidationExcepton("Anda sudah terdaftar dalam seminar");
         }
-        $qrcode = GenerateQRUtil::generate(route("guest.user.login"),uniqid("QR")); // content qr belum
+
         try {
             DB::beginTransaction();
 
 
-            $seminar->mahasiswa()->attach($mahasiswa->nim, ["is_bayar" => 0,"is_hadir" => 0, "qr_code" => $qrcode]);
+            $seminar->mahasiswa()->attach($mahasiswa->nim, ["is_bayar" => 0,"is_hadir" => 0, "qr_code" => null, "tiket_id" => $request->tiket]);
 
             $seminar->kuota = $seminar->kuota -1;
             $seminar->save();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
 use App\Model\Seminar;
+use App\Model\Tiket;
 use App\Service\Impl\SessionServiceImpl;
 use App\Service\SessionService;
 use Illuminate\Http\Request;
@@ -26,6 +27,8 @@ class SeminarController extends Controller
 
         $mahasiswa = $this->sessionService->currentMahasiswa();
 
+        $tiket = Tiket::all();
+
         if ($mahasiswa != null){
             $pesertaSeminar = DB::table("peserta_seminar")
                 ->where("seminar_id", $seminar->id)
@@ -38,7 +41,8 @@ class SeminarController extends Controller
         $data = [
             "title" => "Detail Seminar",
             "seminar" => $seminar,
-            "terdaftar" => $terdaftar
+            "terdaftar" => $terdaftar,
+            "tiket" => $tiket
         ];
         return view("guest.seminar.detail", $data);
     }

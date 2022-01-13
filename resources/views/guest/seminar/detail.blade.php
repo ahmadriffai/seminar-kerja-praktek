@@ -81,8 +81,22 @@
                                     </div>
                                 </div>
 
-                                <a href="{{ route('guest.peserta-seminar.daftar',['seminar' => $seminar]) }}"
-                                   class='btn btn-warning text-white shadow btn-md mt-1 btn-'>Ikuti Seminar</a>
+                                <form method="post" action="{{ route('guest.peserta-seminar.daftar', ['seminar' => $seminar]) }}">
+                                    @csrf
+                                    <select name="tiket" class="form-select @error('tiket') is-invalid @enderror" aria-label="Default select example">
+                                        <option value="">Pilih tiket seminar</option>
+                                        @foreach($tiket as $value)
+                                            <option value="{{ $value->id }}">{{ $value->tiket }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('tiket')
+                                    <div id="nama" class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+
+                                    <button type="submit" class='btn btn-warning text-white shadow btn-md mt-2 btn-'>Daftar Seminar</>
+                                </form>
                             </div>
                         @endif
 
