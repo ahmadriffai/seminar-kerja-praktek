@@ -19,8 +19,11 @@
 
 <body>
 <!-- navbar -->
-<nav class="navbar-custom shadow-sm">
-    <h4 class="text-success pt-2">Seminar</h4>
+<nav class="navbar-custom shadow-sm py-2">
+    <a class="navbar-brand fw-bolder text-dark" href="#">
+        <img src="{{ asset('asset/img/logo-unsiq.png') }}"  class="img-fluid mx-auto" width="40px" alt="" sizes="" srcset="">
+        Seminar KP
+    </a>
     <div class="profile">
         <div class="dropdown">
             <button class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -48,13 +51,14 @@
     <span class="fas fa-bars"></span>
 </label>
 
-<div class="sidebar text-black-50 shadow-sm">
+<div class="sidebar text-black-50 shadow">
     <a href="#" class="sidebar-menu text-black-50 text-decoration-none">
             <span class="fas fa-calendar">
             </span>
         <p>Dashboard</p>
     </a>
-    <a href="#" class="sidebar-menu text-black-50 text-decoration-none">
+    <a href="{{ route('admin.seminar.index') }}"
+       class="sidebar-menu text-black-50 text-decoration-none  @if(url()->current() == url("admin/seminar")) active @endif">
             <span class="fas fa-user">
             </span>
         <p>Buat Seminar</p>
@@ -64,7 +68,8 @@
             </span>
         <p>Pendaftaran Penyeminar</p>
     </a>
-    <a href="#" class="sidebar-menu text-black-50 text-decoration-none @if(url()->current() == url("admin/mahasiswa")) active @endif">
+    <a href="{{ route('admin.mahasiswa.index') }}"
+       class="sidebar-menu text-black-50 text-decoration-none @if(url()->current() == url("admin/mahasiswa")) active @endif">
             <span class="fas fa-calendar-alt">
             </span>
         <p>Data Mahasiswa</p>

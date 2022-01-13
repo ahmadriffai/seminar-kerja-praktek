@@ -17,6 +17,7 @@ entity Peserta_Seminar{
     *nim
     *seminar_id
     tangal_daftar
+    is_bayar
 }
 
 entity Penyeminar{
@@ -43,16 +44,11 @@ entity Seminar{
     selesai
 }
 
+
 entity Sertifikat{
     *id
     --
-    gambar
-    *seminar_id
-}
-
-entity Sertifikat_Mahasiswa{
-    *id
-    --
+    sertifikat
     *nim
     seminar_id
 }

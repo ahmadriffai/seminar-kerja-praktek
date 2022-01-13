@@ -13,6 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Guest
+Route::namespace("Guest")->name("guest.")->group(function () {
+    Route::get("/", "HomeController@index")->name("index");
+
+
+    Route::prefix("user")->name("user.")->group(function (){
+        Route::get("/account-register/{mahasiswa}", "UserController@accountRegister")->name("account-register");
+        Route::post("/account-register/{mahasiswa}", "UserController@accountRegisterPost")->name("account-register-post");
+        Route::get("/account-register", "UserController@checkNIM")->name("check-nim");
+        Route::post("/account-register", "UserController@checkNIMPost")->name("check-nim-post");
+        Route::get("/login", "UserController@login")->name("login");
+        Route::post("/login", "UserController@loginPost")->name("login-post");
+    });
+
+    Route::prefix("seminar")->name("seminar.")->group(function (){
+        Route::get("/{id}", "SeminarController@detail")->name("detail");
+    });
+});
 
 // Admin
 Route::namespace("Admin")->prefix("admin")->name("admin.")->group(function (){
@@ -28,6 +46,14 @@ Route::namespace("Admin")->prefix("admin")->name("admin.")->group(function (){
         Route::post("/edit/{nim}", "MahasiswaController@editPost")->name("edit-post");
         Route::get("/search", "MahasiswaController@search")->name("search");
         Route::post("/import", "MahasiswaController@importPost")->name("import-post");
+    });
+    /*
+     * Seminar
+     */
+    Route::prefix("seminar")->name("seminar.")->group(function (){
+        Route::get("/", "SeminarController@index")->name("index");
+        Route::get("/add", "SeminarController@add")->name("add");
+        Route::post("/add", "SeminarController@addPost")->name("add-post");
     });
 
 

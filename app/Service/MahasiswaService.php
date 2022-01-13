@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Http\Requests\MahasiswaAddRequest;
+use App\Http\Requests\UserCheckNIMRequest;
 use App\Http\Requests\MahasiswaEditRequest;
 use App\Http\Requests\MahasiswaImportRequest;
 use App\Http\Response\MahasiswaResponse;

@@ -1,23 +1,30 @@
 @extends("layout.admin")
 
 @section("content")
-    <div class="row">
-        <div class="col-md-8">
-            <a href="{{ route('admin.mahasiswa.add') }}" class="btn btn-primary"><i class="fas fa-plus-square"></i> Tambah Data Mahasiswa</a>
+    <div class="row mb-2">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <div class="row pt-2">
+                    <div class="col-md-8">
+                        <a href="{{ route('admin.mahasiswa.add') }}" class="btn btn-primary"><i class="fas fa-plus-square"></i> Tambah Data Mahasiswa</a>
 
-            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                <i class="fas fa-file-import"></i> Import Excel
-            </button>
-        </div>
-        <div class="col-md-4">
-            <form method="get" action="{{ route('admin.mahasiswa.search') }}">
-                <div class="input-group mb-3">
-                    <input type="text" name="key" class="form-control" placeholder="Cari Mahasiswa (nim,nama)" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ old('key') }}">
-                    <button class="btn btn-primary" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <i class="fas fa-file-import"></i> Import Excel
+                        </button>
+                    </div>
+                    <div class="col-md-4 mt-2">
+                        <form method="get" action="{{ route('admin.mahasiswa.search') }}">
+                            <div class="input-group mb-3">
+                                <input type="text" name="key" class="form-control shadow-sm border-0" placeholder="Cari Mahasiswa (nim,nama)" aria-label="Recipient's username" aria-describedby="button-addon2" value="{{ $_GET['key'] ?? '' }}">
+                                <button class="btn btn-primary shadow-sm" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
+
     <div class="row">
         <div class="card border-0 shadow-sm">
             <div class="card-body">

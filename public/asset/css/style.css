@@ -1,7 +1,7 @@
 
 :root{
-    --primary-color: #3e9bfa;
-    --primary-color-hover: #60a9ef;
+    --primary-color: #FFC100;
+    --primary-color-hover: #ffffff;
     --dark-color: #000000;
 }
 * {
@@ -13,9 +13,11 @@
 
 
 body{
-    background-color: #f8f9fa;
+    background-color: #f1f1f1;
+    font-weight: 300;
 }
 
+/*f6c568*/
 /* navbar */
 
 .navbar-custom{
@@ -32,6 +34,7 @@ body{
     padding-left: 6rem;
 
 }
+
 
 .profile{
     display: flex;
@@ -81,8 +84,8 @@ body{
     left: 0;
     top: 0;
     padding: 80px 0 20px 0;
-    color: #000000;
-    background-color: #fff;
+    color: var(--primary-color);
+    background-color: #ffffff;
     box-sizing: border-box;
     z-index: 1;
 }
@@ -194,6 +197,25 @@ main{
     width: 100%;
     box-sizing: border-box;
 }
+
+
+/* detail-seminar */
+.banner-seminar{
+    height: 20rem;
+    overflow: hidden;
+}
+
+.banner-seminar img{
+    z-index: -1;
+    position: relative;
+    top: -120px;
+}
+
+.gambar-seminar{
+    position: relative;
+    top: -100px;
+}
+
 
 @media screen and (max-width:580px) {
     .profile-name {
