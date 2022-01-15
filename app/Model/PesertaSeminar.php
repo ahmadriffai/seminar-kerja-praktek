@@ -12,5 +12,8 @@ class PesertaSeminar extends Pivot
     public $incrementing = true;
     protected $fillable = ["id","nim","seminar_id","qr_code","is_bayar","is_hadir", "tiket_id"];
 
+    public function tiket(){
+        return $this->belongsTo(Tiket::class);
+    }
 
 }

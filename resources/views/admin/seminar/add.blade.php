@@ -1,5 +1,9 @@
 @extends("layout.admin")
 
+@section("head")
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+@endsection
+
 @section("content")
 
     <a href="{{ route('admin.mahasiswa.index') }}" class="btn btn-primary"><i class="fas fa-angle-left"></i> Kembali</a>
@@ -26,9 +30,12 @@
 
                         <div class="mb-3">
                             <label for="deskripsi" class="form-label">Deskripsi</label>
-                            <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" id="exampleFormControlTextarea1" rows="5" >
-                                {{ old('deskripsi') }}
+
+
+                            <textarea name="deskripsi" id="editor" class="form-control @error('deskripsi') is-invalid @enderror" value="{{ old('deskripsi') }}">
+                                {{ old('deskripsi') ?? ""}}
                             </textarea>
+
                             @error('deskripsi')
                             <div id="nama_seminar" class="invalid-feedback">
                                 {{ $message }}
@@ -40,7 +47,9 @@
                             <label for="tanggal_mulai" class="form-label">Tanggal Mulai</label>
                             <input type="date" name="tanggal_mulai"
                                    class="form-control @error('tanggal_mulai') is-invalid @enderror" id="tanggal_mulai"
-                                   placeholder="Tanggal Mulai" value="{{ old('tanggal_mulai') }}">
+                                   placeholder="Tanggal Mulai"
+                                   min="<?= date('Y-m-d') ?>"
+                                   value="{{ old('tanggal_mulai') }}">
                             @error('tanggal_mulai')
                             <div id="nama_seminar" class="invalid-feedback">
                                 {{ $message }}
@@ -52,6 +61,7 @@
                             <label for="tanggal_selesai" class="form-label">Tanggal Selesai</label>
                             <input type="date" name="tanggal_selesai"
                                    class="form-control @error('tanggal_selesai') is-invalid @enderror" id="tanggal_selesai"
+                                   min="<?= date('Y-m-d') ?>"
                                    placeholder="Tanggal Selesai" value="{{ old('tanggal_selesai') }}">
                             @error('tanggal_selesai')
                             <div id="nama_seminar" class="invalid-feedback">
@@ -99,7 +109,6 @@
                         </div>
 
 
-
                         <button type="submit" class="btn btn-primary">Submit</button>
 
                     </form>
@@ -107,4 +116,14 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+    </script>
 @endsection

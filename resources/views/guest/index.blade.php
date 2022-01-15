@@ -11,7 +11,7 @@
                     Daftarkan Seminar Kerja Praktek kamu dan dapatkan ilmu dan
                     pengalaman yang bermanfaat
                 </p>
-                <a href="" class="btn btn-warning text-white shadow mt-4">Daftar Sekarang</a>
+                <a href="{{ route('guest.seminar.list') }}" class="btn btn-warning text-white shadow mt-4">Daftar Seminar Sekarang</a>
             </div>
             <div class="col-md-6">
                 <img src="{{ asset('asset/img/landing1.png') }}" alt="" class="img-fluid" width="400px"/>
@@ -41,7 +41,7 @@
                                     {{ $value->nama_seminar }}
                                 </h5>
                                 <p class="text-black-50">
-                                    {{ implode(" ",array_slice(explode(" ",$value->deskripsi), 0,10)) }}.....
+                                    {!! implode(" ",array_slice(explode(" ",$value->deskripsi), 0,5)) !!}...
                                 </p>
                                 <a href="{{ route('guest.seminar.detail', ['id' => $value->id]) }}" class="btn btn-sm btn-outline-warning">Daftar</a>
                             </div>
@@ -55,7 +55,7 @@
             </div>
             <div class="row pt-3">
                 <div class="section-judul text-center">
-                    <a class="btn btn-warning text-white btn-sm shadow">Lihat Seminar Lainya</a>
+                    <a href="{{ route('guest.seminar.list') }}" class="btn btn-warning text-white btn-sm shadow">Lihat Seminar Lainya</a>
                 </div>
             </div>
         </div>

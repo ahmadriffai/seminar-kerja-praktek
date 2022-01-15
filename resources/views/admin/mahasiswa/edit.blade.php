@@ -42,7 +42,9 @@
                             <label for="prodi" class="form-label">Prodi</label>
                             <select class="form-select @error('prodi') is-invalid @enderror" name="prodi" aria-label="Default select example">
                                 <option value="">-- Pilih Prodi --</option>
-                                <option value="Teknik Informatika">Teknik Informatika</option>
+                                <option value="Teknik Informatika" {{ $mahasiswa->prodi == 'Teknik Informatika' ? 'selected': ''}}>
+                                    Teknik Informatika
+                                </option>
                             </select>
                             @error('prodi')
                             <div id="nama" class="invalid-feedback">
@@ -56,7 +58,7 @@
                             <select class="form-select @error('angkatan') is-invalid @enderror" name="angkatan" aria-label="Default select example">
                                 <option value="">-- Pilih Angkatan --</option>
                                 @foreach($angkatan as $value)
-                                <option value="{{ $value }}">{{ $value }}</option>
+                                    <option value="{{ $value }}" {{ $value == $mahasiswa->angkatan ? 'selected' : '' }}>{{ $value }}</option>
                                 @endforeach
                             </select>
                             @error('angkatan')

@@ -14,7 +14,8 @@ class Seminar extends Model
 
     public function mahasiswa(){
         return $this->belongsToMany(Mahasiswa::class,"peserta_seminar", "seminar_id","nim")
-            ->using(PesertaSeminar::class);
+            ->using(PesertaSeminar::class)
+            ->withPivot("qr_code","is_bayar","is_hadir","tiket_id","created_at");
     }
 
 }

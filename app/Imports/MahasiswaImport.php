@@ -15,6 +15,9 @@ class MahasiswaImport implements ToCollection, WithStartRow
 
     public function collection(Collection $collection)
     {
+
+        // dd($collection);
+
         foreach ($collection as $row){
 
             if ($row[0] == null ){
@@ -26,7 +29,7 @@ class MahasiswaImport implements ToCollection, WithStartRow
                     "nim" => $row[1],
                     "nama" => $row[2],
                     "prodi" => $row[4],
-                    "angkatan" => $row[3],
+                    "angkatan" => (int)$row[3],
                     "nomer_telp" => $row[5],
                     "user_id" => null
                 ]);

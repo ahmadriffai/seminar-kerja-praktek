@@ -1,0 +1,88 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+
+class SeminarKerjaPraktek{
+    void main()
+}
+
+class MenuLogin
+
+class MenuDaftar
+
+class DaftarManager {
+    pemesanan : Pemesanan;
+
+    pesanTiket() : void
+    tambahPendaki() void
+}
+
+
+class Mahasiswa{
+    id : string
+    nik : string
+    nama : string
+    alamat : string
+
+    getNik() : string
+    getNama() : string
+    getAlamat : string
+}
+
+class Peserta{
+    id : string
+    nik : string
+    nama : string
+    alamat : string
+
+    getNik() : string
+    getNama() : string
+    getAlamat : string
+}
+class Penyeminar{
+    id : string
+    nik : string
+    nama : string
+    alamat : string
+
+    getNik() : string
+    getNama() : string
+    getAlamat : string
+}
+
+
+class Seminar{
+    id : string
+    nik : string
+    nama : string
+    alamat : string
+
+    getNik() : string
+    getNama() : string
+    getAlamat : string
+}
+
+class User{
+    id : string
+    nik : string
+    nama : string
+    alamat : string
+
+    getNik() : string
+    getNama() : string
+    getAlamat : string
+}
+
+SeminarKerjaPraktek o-- MenuLogin : memiliki
+SeminarKerjaPraktek o-- MenuPemesanan : memiliki
+
+MenuPemesanan -- PemesananManager : dikelola
+PemesananManager -- Tiket : mengakses
+PemesananManager -- Pendaki : mengakses
+PemesananManager -- Pemesanan : mengakses
+
+MenuLogin -- LoginManager : dikelola
+LoginManager -- User : mengakses
+
+@enduml

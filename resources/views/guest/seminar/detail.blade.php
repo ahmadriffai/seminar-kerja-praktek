@@ -3,7 +3,7 @@
 @section("content")
     <!-- banner -->
     <div class="banner-seminar border-bottom">
-{{--        <img src="{{ asset('/asset/img/banner-seminar.jpg') }}" alt="" class="img-fluid">--}}
+        <img src="{{ asset('/asset/img/banner-seminar.jpg') }}" alt="" class="img-fluid">
     </div>
 
     <div class="container">
@@ -13,7 +13,7 @@
                     <div class="col-lg-3 col-sm-5 col-md-4 mb-sm-7">
                         <div class="border-0 shadow gambar-seminar" style="width: 15rem">
                             <div class="card-gambar">
-{{--                                <img src="{{ asset($seminar->gambar) }}" class="img-fluid" alt="..." />--}}
+                                <img src="{{ asset($seminar->gambar) }}" class="img-fluid" alt="..." />
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                     <div class="col-lg-9 order-lg-1 order-2 col-lg-push-3 pr-lg-5">
                         <h3>Deskripsi</h3>
                         <div class="fr-view mb-5">
-                            {{ $seminar->deskripsi }}
+                            {!! $seminar->deskripsi !!}
                         </div>
                     </div>
                     <div class="col-lg-3 order-lg-2 order-1 pl-lg-4 mb-5 event-info">

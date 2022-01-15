@@ -46,4 +46,32 @@ class SeminarController extends Controller
         ];
         return view("guest.seminar.detail", $data);
     }
+
+    public function list(){
+
+        $seminar = Seminar::paginate(4);
+
+        $data = [
+            "title" => "Daftar Seminar ",
+            "seminar" => $seminar
+        ];
+
+        return view("guest.seminar.list",$data);
+    }
+
+
+    public function search(Request $request){
+        $key = $request->key;
+
+        $seminar = Seminar::where("nama_seminar","like","%".$key."%")
+            ->orWhere("deskripsi","like","%".$key."%")
+            ->paginate(5);
+
+        $data = [
+            "title" => "Daftar Seminar ",
+            "seminar" => $seminar
+        ];
+
+        return view("guest.seminar.list",$data);
+    }
 }

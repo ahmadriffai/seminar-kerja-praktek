@@ -25,12 +25,17 @@ Route::namespace("Guest")->name("guest.")->group(function () {
         Route::post("/account-register", "UserController@checkNIMPost")->name("check-nim-post");
         Route::get("/login", "UserController@login")->name("login");
         Route::post("/login", "UserController@loginPost")->name("login-post");
+        Route::get("/login-admin", "UserController@loginAdmin")->name("login-admin");
+        Route::post("/login-admin", "UserController@loginAdminPost")->name("login-admin-post");
         Route::get("/logout", "UserController@logout")->name("logout");
     });
 
     // seminar
     Route::prefix("seminar")->name("seminar.")->group(function (){
-        Route::get("/{id}", "SeminarController@detail")->name("detail");
+        Route::get("/detail/{id}", "SeminarController@detail")->name("detail");
+        Route::get("/list", "SeminarController@list")->name("list");
+        Route::get("/search", "SeminarController@search")->name("search");
+
     });
     // peserta seminar
     Route::prefix("peserta-seminar")->name("peserta-seminar.")->group(function (){

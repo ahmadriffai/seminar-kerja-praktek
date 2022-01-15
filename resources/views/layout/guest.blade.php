@@ -18,7 +18,7 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-warning shadow nav-custom py-3">
     <div class="container">
-        <a class="navbar-brand fw-bolder" href="#">
+        <a class="navbar-brand fw-bolder" href="{{ route('guest.index') }}">
             <img src="{{ asset('asset/img/logo-unsiq.png') }}"  class="img-fluid mx-auto" width="40px" alt="" sizes="" srcset="">
             Seminar KP
         </a>
@@ -29,15 +29,19 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active fw-bold" aria-current="page" href="{{ route('guest.index') }}">Home</a>
+                    <a class="nav-link fw-bold @if(url()->current() == url("/")) active @endif" aria-current="page" href="{{ route('guest.index') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-bold" href="./seminar.html">Seminar</a>
+                    <a class="nav-link fw-bold @if(url()->current() == url("/seminar/list")) active @endif" href="{{ route('guest.seminar.list') }}">Seminar</a>
                 </li>
             </ul>
             <form class="d-flex">
-                <a href="{{ route('guest.user.login') }}" class="btn btn-light shadow" type="submit">Login</a>
-                <a href="{{ route('guest.user.check-nim') }}" class="btn btn-secondary mx-1 shadow" type="submit">Daftar</a>
+                @if(!isset($_COOKIE['X-SEMINAR-KP']))
+                    <a href="{{ route('guest.user.login') }}" class="btn btn-light shadow" type="submit">Login</a>
+                    <a href="{{ route('guest.user.check-nim') }}" class="btn btn-secondary mx-1 shadow" type="submit">Daftar</a>
+                @else
+                    <a href="{{ route('mahasiswa.seminar.registered') }}" class="btn btn-secondary mx-1 shadow" type="submit">Dashboard</a>
+                @endif
             </form>
         </div>
     </div>

@@ -3,6 +3,7 @@
 namespace App\Service\Impl;
 
 use App\Exceptions\MustLoginException;
+use App\Exceptions\RegistrationPenyeminarException;
 use App\Exceptions\ValidationExcepton;
 use App\Http\Requests\PesertaSeminarRegisRequest;
 use App\Http\Response\PesertaSeminarResponse;
@@ -29,6 +30,9 @@ class PesertaSeminarServiceImpl implements PesertaSeminarService
         if ($mahasiswa == null){
             throw new MustLoginException("login terlebih dahulu, untuk melanjutkan pendaftaran");
         }
+        if ($request->tiket == 2){
+            throw new RegistrationPenyeminarException("lengakpi berkas, untuk melanjutkan pendaftaran");
+        }
 
         $pesertaSeminar = DB::table("peserta_seminar")
             ->where("seminar_id", $seminar->id)
@@ -42,7 +46,13 @@ class PesertaSeminarServiceImpl implements PesertaSeminarService
             DB::beginTransaction();
 
 
-            $seminar->mahasiswa()->attach($mahasiswa->nim, ["is_bayar" => 0,"is_hadir" => 0, "qr_code" => null, "tiket_id" => $request->tiket]);
+            $seminar->mahasiswa()->attach($mahasiswa->nim, [
+                "is_bayar" => 0,
+                "is_hadir" => 0,
+                "qr_code" => null,
+                "tiket_id" => $request->tiket,
+                "created_at" => now()
+            ]);
 
             $seminar->kuota = $seminar->kuota -1;
             $seminar->save();

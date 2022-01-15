@@ -73,11 +73,36 @@ class UserController extends Controller
         return view("guest.user.login", $data);
     }
 
+    public function loginAdmin(){
+        $data = [
+            "title" => "Login Admin Seminar KP"
+        ];
+        return view("guest.user.login-admin", $data);
+    }
+
+    public function loginAdminPost(UserLoginRequest $request){
+        try {
+            $respponse = $this->userService->login($request);
+            if ($respponse->user->role == "ADMIN"){
+                $this->sessionService->create($respponse->user->id);
+                return redirect()->route("admin.seminar.index")->with("success", "Berhasil login");
+            }else{
+                return redirect()->route("guest.user.login")->with("success", "User terdaftar sebagai user, silahkan login");
+            }
+        }catch (ValidationExcepton $exception){
+            return back()->with("error", $exception->getMessage())->withInput($request->all());
+        }
+    }
+
     public function loginPost(UserLoginRequest $request){
         try {
             $respponse = $this->userService->login($request);
-            $this->sessionService->create($respponse->user->id);
-            return redirect()->route("mahasiswa.seminar.registered")->with("success", "Berhasil login");
+            if ($respponse->user->role == "MAHASISWA"){
+                $this->sessionService->create($respponse->user->id);
+                return redirect()->route("mahasiswa.seminar.registered")->with("success", "Berhasil login");
+            }else{
+                return redirect()->route("guest.user.login-admin")->with("success", "User terdaftar sebagai Admin, silahkan login");
+            }
         }catch (ValidationExcepton $exception){
             return back()->with("error", $exception->getMessage())->withInput($request->all());
         }

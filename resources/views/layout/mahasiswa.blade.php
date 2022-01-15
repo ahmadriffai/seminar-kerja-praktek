@@ -57,15 +57,27 @@
             </span>
         <p>Seminar Terdaftar</p>
     </a>
+    <a href="{{ route('guest.seminar.list') }}"
+       class="sidebar-menu text-black-50 text-decoration-none  @if(url()->current() == url("mahasiswa/seminar/list")) active @endif">
+            <span class="fas fa-clipboard-list">
+            </span>
+        <p>Daftar Seminar</p>
+    </a>
+    <a href=""
+       class="sidebar-menu text-black-50 text-decoration-none ">
+            <span class="fas fa-clipboard-list">
+            </span>
+        <p>Pendaftaran Penyeminar</p>
+    </a>
 
 </div>
 <!-- //sidebar -->
 
 <!-- main -->
 <main>
-    <div class="row my-4">
+    <div class="row my-3">
         <div class="section-judul">
-            <h3>{{ $title ?? '' }}</h3>
+            <h5 class="fw-light">{{ $title ?? '' }}</h5>
         </div>
     </div>
 
